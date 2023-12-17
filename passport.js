@@ -3,8 +3,8 @@ window.passport = new window.immutable.passport.Passport({
     environment: window.immutable.config.Environment.SANDBOX,
   }),
   clientId: "vuNkF06sKRhzhdH5UptcPWXVT07gGVVl",
-  redirectUri: "https://kid-proper-falcon.ngrok-free.app",
-  logoutRedirectUri: "https://kid-proper-falcon.ngrok-free.app/logout.html",
+  redirectUri: "https://immutable-stackupinvaders.vercel.app",
+  logoutRedirectUri: "https://immutable-stackupinvaders.vercel.app/logout.html",
   audience: "platform_api",
   scope: "openid offline_access email transact",
 });
