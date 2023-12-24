@@ -9,6 +9,8 @@ const connectPassport = async function () {
   console.log(window.accounts);
   if (window.accounts) {
     getUserInfo();
+    let address = document.getElementById("address");
+    address.innerText = window.accounts;
   }
 };
 
@@ -52,9 +54,9 @@ async function getData(id) {
       1: {
         image:
           "https://bafkreigugjgtcvkwg7ym7uk5ic65wmtkmbngonaj3twzl3nttuj5w7zjku.ipfs.nftstorage.link/",
-        name: "Level 1 Badge",
+        name: "Space Guru Badge",
         description:
-          "This NFT represents your first accomplishment on StackUp Invaders.",
+          "This NFT represents your accomplishments and identifies you as a space guru.",
       },
       2: {
         image:
@@ -72,7 +74,7 @@ async function getData(id) {
     }
 
     nft.innerHTML = `
-    <div class="alert alert-success"> Great Score! Claim this NFT, then resume the game.</div>
+    <div class="alert alert-success"> Great ! Claim this NFT, to redeem your price.</div>
     <div class="card" >
     <div class="card-body">
       <div class="media">
@@ -92,6 +94,7 @@ async function getData(id) {
     claimBtn.onclick = async function () {
       if (id === "1") {
         await mintNft();
+        alert("NFT minted");
       } else if (id === "2") {
         await refreshNft();
       }

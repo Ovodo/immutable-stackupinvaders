@@ -16,7 +16,8 @@ class Player {
     this.gas = [];
     this.nftShown = { 1: false, 2: false };
     this.gamePaused = false;
-    this.resumeCount = 0;
+    this.bulletShield = false;
+    this.powerUps = [];
   }
 
   showNft(tokenId) {
@@ -28,13 +29,13 @@ class Player {
   }
 
   respawn() {
+    this.lives -= 1;
     this.x = width / 2;
     this.y = height - 30;
     this.isMovingLeft = false;
     this.isMovingRight = false;
     this.isMovingUp = false;
     this.isMovingDown = false;
-    this.lives -= 1;
   }
 
   upgradeSpaceship() {
@@ -44,6 +45,11 @@ class Player {
   // game state
   update() {
     if (this.gamePaused) return;
+    // Check if respawn delay is active
+
+    if (this.bulletShield) {
+      setTimeout(() => (this.bulletShield = false), 20000);
+    }
     if (this.isMovingRight && this.x < width - 40) {
       this.x += 1;
     } else if (this.isMovingLeft && this.x > 0) {
@@ -77,14 +83,6 @@ class Player {
     this.showNft(tokenId);
   }
 
-  resumeGame() {
-    this.gamePaused = false;
-    this.resumeCount++;
-    if (this.resumeCount === 2) {
-      this.upgradeSpaceship();
-    }
-  }
-
   // movement methods
   moveLeft() {
     this.isMovingRight = false;
@@ -105,15 +103,29 @@ class Player {
     this.isMovingUp = false;
     this.isMovingDown = true;
   }
+  addPowerUp(powerUp) {
+    // Add the power-up to the player's list
+    this.powerUps.push(powerUp);
+  }
 
   shoot() {
-    const bulletOffset = 5;
+    let bulletOffset = 2;
     if (this.bullets.length < this.maxBullets) {
       this.bullets.push(
         new PlayerBullet(this.x + this.r, this.y, this.playerIsUp())
       );
 
-      if (this.maxBullets > 2) {
+      if (level >= 2) {
+        this.bullets.push(
+          new PlayerBullet(
+            this.x - this.r + bulletOffset * 2,
+            this.y,
+            this.playerIsUp()
+          )
+        );
+      }
+      if (this.score >= 1000) {
+        bulletOffset = 6;
         this.bullets.push(
           new PlayerBullet(
             this.x - this.r + bulletOffset * 2,
@@ -127,17 +139,33 @@ class Player {
 
   // drawing methods
   draw() {
+    // Draw active power-ups
+    for (let i = this.powerUps.length - 1; i >= 0; i--) {
+      // this.powerUps[i].update();
+      // this.powerUps[i].display();
+
+      // Check if the power-up duration has expired and remove it
+      if (this.powerUps[i]?.duration <= 0) {
+        this.powerUps.splice(i, 1);
+      }
+    }
     image(this.image, this.x, this.y, this.r * 2, this.r * 2);
     this.drawBullets();
     this.drawGas();
 
-    if (this.score == 50 && !this.nftShown["1"]) {
-      this.gamePaused = true;
-      this.pauseGame("1");
-    } else if (this.score == 100 && !this.nftShown["2"]) {
-      this.gamePaused = true;
-      this.pauseGame("2");
+    if (this.bulletShield) {
+      fill(150, 150, 255, 100); // Transparent blue color for the shield
+      ellipse(this.x + this.r, this.y + this.r, this.r * 4, this.r * 4);
     }
+
+    if (level >= 3 && invaders.aliens.length === 0 && !this.nftShown["1"]) {
+      this.gamePaused = !true;
+      this.pauseGame("1");
+    }
+    // else if (this.score == 100 && !this.nftShown["2"]) {
+    //   this.gamePaused = !true;
+    //   this.pauseGame("2");
+    // }
   }
 
   drawBullets() {
@@ -180,10 +208,10 @@ class Player {
     fill(255);
     let bounty_text = window?.userProfile?.email + ": ";
     let bounty_text_w = textWidth(bounty_text);
-    let score = text(bounty_text, 50, 25);
+    let score = text(bounty_text, 75, 25);
     push();
     fill(100, 255, 100);
-    text(this.score, bounty_text_w + 50, 25);
+    text(this.score, bounty_text_w + 20, 25);
     pop();
     this.drawLives(bounty_text_w + textWidth(this.score) + 100);
   }

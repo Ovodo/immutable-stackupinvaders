@@ -1,12 +1,12 @@
-class Debris {
+class Powerup {
   constructor() {
-    this.r = 5;
-    this.resetDebris();
+    this.r = 4;
+    this.resetPowerup();
   }
 
-  resetDebris() {
+  resetPowerup() {
     this.y = random(height - 10);
-    this.r = random(5, 10);
+    // this.r = random(5, 10);
 
     let spawnLeftSide = random(1) < 0.5;
 
@@ -27,7 +27,7 @@ class Debris {
     }
 
     if (this.isOffScreen()) {
-      this.resetDebris();
+      this.resetPowerup();
     }
   }
 
@@ -41,15 +41,13 @@ class Debris {
   }
 
   display() {
-    fill(100);
-
+    fill(0, 0, 255);
     noStroke();
-    // textAlign(CENTER, CENTER);
+    textAlign(CENTER, CENTER);
 
     ellipse(this.x, this.y, this.r * 2, this.r * 2);
-
     // fill(255);
-    // text("d", this.x, this.y);
+    // text("life", this.x, this.y);
   }
 
   hasHitPlayer(player) {
