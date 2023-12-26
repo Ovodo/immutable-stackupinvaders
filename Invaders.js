@@ -141,7 +141,7 @@ class Invaders {
     }
 
     // Level 3: Tank Aliens
-    else if (level === 3) {
+    else if (level === 3 && showChampionText == false) {
       for (let i = 0; i < this.rowsCount; i++) {
         for (let x = 40; x < width - 40; x += 30) {
           aliens.push(new Tank(x, y, this.tank, shootUp));

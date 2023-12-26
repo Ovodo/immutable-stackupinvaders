@@ -139,6 +139,7 @@ const mintNft = async function () {
   if (window?.provider) {
     const provider = new ethers.providers.Web3Provider(window.provider);
     const signer = provider.getSigner();
+    console.log("signer", signer);
     const userAddress = await signer.getAddress();
     const contract = new ethers.Contract(
       CONTRACT_ADDRESS,

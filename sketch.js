@@ -205,7 +205,7 @@ function draw() {
         spawnPowerUps();
         // Display "Champion" text
         if (showChampionText) {
-          fill(255, 0, 0);
+          fill(255, 255, 255);
           textSize(36);
           text("Champion", width / 2, height / 2 + 40);
           // showChampionText = false;
