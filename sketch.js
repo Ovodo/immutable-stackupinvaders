@@ -18,7 +18,7 @@ let POWER_UPS = 5;
 let levelDurationMillis = 80000; // Set the desired level duration in milliseconds
 let levelStartTime;
 let timerStarted = false;
-let level = 3;
+let level = 1;
 const NUM_DEBRIS = 5; // number of space debris
 let levelAdvancement = false;
 let levelAdvancementText = "";
@@ -39,7 +39,7 @@ function setup() {
   canvas = createCanvas(canvasEl.offsetWidth, 400);
   canvas.style("display", "block");
   canvas.parent("sketch-holder");
-  level = 3;
+  level = 1;
   invaders = new Invaders(alienImage, spaceShip, tank, 3);
   player = new Player(shooterImage);
   // levelStartTime = millis();
