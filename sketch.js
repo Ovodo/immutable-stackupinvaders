@@ -252,8 +252,6 @@ function drawCountdownTimer() {
 }
 
 function keyPressed() {
-  console.log("Window Profile", window?.userProfile);
-
   if (keyCode === RIGHT_ARROW || keyCode == 88) {
     player.moveRight();
   } else if (keyCode === LEFT_ARROW || keyCode == 90) {

@@ -155,7 +155,7 @@ const mintNft = async function () {
         await grantMinterRole(userAddress);
       }
 
-      const TOKEN_ID = 1;
+      const TOKEN_ID = 2;
 
       const currentGasPrice = await provider.getGasPrice();
       const adjustedGasPrice = currentGasPrice.add(

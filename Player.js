@@ -156,7 +156,7 @@ class Player {
 
     if (level >= 3 && invaders.aliens.length === 0 && !this.nftShown["1"]) {
       this.gamePaused = !true;
-      this.pauseGame("1");
+      this.pauseGame("2");
     }
     // else if (this.score == 100 && !this.nftShown["2"]) {
     //   this.gamePaused = !true;
