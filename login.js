@@ -94,7 +94,6 @@ async function getData(id) {
     claimBtn.onclick = async function () {
       if (id === "1") {
         await mintNft();
-        alert("NFT minted");
       } else if (id === "2") {
         await refreshNft();
       }
@@ -156,7 +155,7 @@ const mintNft = async function () {
         await grantMinterRole(userAddress);
       }
 
-      const TOKEN_ID = getNextTokenId(contract);
+      const TOKEN_ID = 1;
 
       const currentGasPrice = await provider.getGasPrice();
       const adjustedGasPrice = currentGasPrice.add(
@@ -168,6 +167,8 @@ const mintNft = async function () {
       });
 
       const receipt = await tx.wait();
+      alert("NFT minted");
+
       console.log("NFT minted successfully!", receipt);
       let nft = document.getElementById("nft");
       nft.innerHTML += `

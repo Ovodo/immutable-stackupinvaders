@@ -18,12 +18,12 @@ let POWER_UPS = 5;
 let levelDurationMillis = 80000; // Set the desired level duration in milliseconds
 let levelStartTime;
 let timerStarted = false;
-let level = 1;
+let level = 3;
 const NUM_DEBRIS = 5; // number of space debris
 let levelAdvancement = false;
 let levelAdvancementText = "";
 let secondsRemaining;
-let showChampionText = false;
+let winner = false;
 
 function preload() {
   alienImage = loadImage("invader1.png");
@@ -191,9 +191,9 @@ function draw() {
       fill(255);
       textSize(24);
       textAlign(CENTER, CENTER);
-      text(levelAdvancementText, width / 2, height / 2);
+      text(levelAdvancementText, width / 2, height / 2 + 40);
       if (level === 3) {
-        showChampionText = true;
+        winner = true;
         resumeButton.html("Restart");
       }
       noLoop();
@@ -203,14 +203,7 @@ function draw() {
         levelStartTime = millis();
 
         spawnPowerUps();
-        // Display "Champion" text
-        if (showChampionText) {
-          fill(255, 255, 255);
-          textSize(36);
-          text("Champion", width / 2, height / 2 + 40);
-          // showChampionText = false;
-        }
-      }, 1000); // Pause for 3 seconds before advancing to the next level
+      }, 1000);
     }
   } else {
     connectToStart();
