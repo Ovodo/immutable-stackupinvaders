@@ -61,9 +61,9 @@ async function getData(id) {
       2: {
         image:
           "https://bafkreifxbz53txersuyqok75dmdhyrnfkascznytyvum2i25bunii5dih4.ipfs.nftstorage.link/",
-        name: "Level 2 Badge",
+        name: "Space Guru Badge",
         description:
-          "This NFT represents your second accomplishment on StackUp Invaders which grants you an upgraded spaceship.",
+          "This NFT represents your accomplishments and identifies you as a space guru.",
       },
     };
 
@@ -92,11 +92,11 @@ async function getData(id) {
     `;
     const claimBtn = this.document.getElementById("claim-btn");
     claimBtn.onclick = async function () {
-      if (id === "1") {
-        await mintNft();
-      } else if (id === "2") {
-        await refreshNft();
-      }
+      // if (id === "1") {
+      //   await mintNft();
+      // } else if (id === "2") {
+      await mintNft();
+      // }
     };
     return details;
   } catch (error) {
