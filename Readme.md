@@ -52,3 +52,12 @@ For user convenience, the player's address is now displayed at the bottom of the
 
 **Description:**  
 The minting function, responsible for claiming nft achievements, has been strategically shifted to the end of the game. Players are now rewarded with a Guru badge upon successfully completing all three levels.
+
+## 6. Time up
+
+**Description**
+A Timer was added at the top of the sketch to urge players to defeat all enemies on time else it is game over.
+
+**Code Location:**
+
+- `sketch.js`:included variables like `levelDurationMillis`,`timerStarted` and `levelStartTime`.
