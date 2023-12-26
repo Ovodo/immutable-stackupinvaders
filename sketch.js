@@ -284,11 +284,11 @@ function updatePowerUpsAndCheckCollisions() {
     if (allPowerUps[i].hasHitPlayer(player)) {
       if (allPowerUps[i] instanceof BulletShield) {
         // allPowerUps[i].draw(player);
-        player.bulletShield = true;
+        player.activateBulletShield();
       } else if (allPowerUps[i] instanceof Powerup) {
         player.lives += 1;
       }
-      // allPowerUps.splice(i, 1);
+      allPowerUps.splice(i, 1);
       break;
     }
   }

@@ -18,7 +18,8 @@ class Player {
     this.gamePaused = false;
     this.bulletShield = false;
     this.powerUps = [];
-    this.bulletShieldTimeout = null;
+    this.bulletShieldDuration = 20000; // Duration of the bullet shield in milliseconds
+    this.bulletShieldActivationTime = 0;
   }
 
   showNft(tokenId) {
@@ -48,14 +49,11 @@ class Player {
     if (this.gamePaused) return;
 
     // Check if respawn delay is active
-    if (this.bulletShield) {
-      if (this.bulletShieldTimeout) {
-        clearTimeout(this.bulletShieldTimeout); // Clear existing timeout
-      }
-
-      this.bulletShieldTimeout = setTimeout(() => {
-        this.bulletShield = false;
-      }, 20000); // Set the correct duration for the timeout (20 seconds)
+    if (
+      this.bulletShield &&
+      millis() - this.bulletShieldActivationTime >= this.bulletShieldDuration
+    ) {
+      this.bulletShield = false;
     }
 
     if (this.isMovingRight && this.x < width - 40) {
@@ -84,6 +82,10 @@ class Player {
         break;
       }
     }
+  }
+  activateBulletShield() {
+    this.bulletShield = true;
+    this.bulletShieldActivationTime = millis();
   }
 
   pauseGame(tokenId) {
