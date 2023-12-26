@@ -16,24 +16,6 @@ class Invaders {
   }
 
   update(player) {
-    // Check conditions to spawn bullet shields
-    // if ((player.score = 100)) {
-    //   this.spawnBulletShield();
-    // }
-    // Update and draw power-ups
-    // for (let i = this.powerUps.length - 1; i >= 0; i--) {
-    //   // this.powerUps[i].update();
-    //   this.powerUps[i].display();
-
-    //   // Check collision with player
-    //   if (
-    //     dist(player.x, player.y, this.powerUps[i].x, this.powerUps[i].y) <
-    //     player.r + this.powerUps[i].r
-    //   ) {
-    //     this.powerUps[i].applyPowerUp(player);
-    //     this.powerUps.splice(i, 1);
-    //   }
-    // }
     for (let alien of this.aliens) {
       if (this.direction == 0) {
         alien.x += this.speed;

@@ -23,23 +23,4 @@ class BulletShield extends Powerup {
       player.r * 4
     );
   }
-  reduceDuration() {
-    // Reduce the duration by a certain amount
-    this.duration--;
-
-    // If the duration is zero or less, the shield is no longer active
-    if (this.duration <= 0) {
-      // Perform any cleanup or additional logic when the shield expires
-      // For example, remove the shield from the list of active power-ups
-      const index = allPowerUps.indexOf(this);
-      if (index !== -1) {
-        allPowerUps.splice(index, 1);
-      }
-    }
-  }
-
-  applyPowerUp(player) {
-    // Example: Make the player temporarily invulnerable to enemy bullets
-    player.addPowerUp(this);
-  }
 }

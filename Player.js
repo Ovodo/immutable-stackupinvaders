@@ -18,6 +18,7 @@ class Player {
     this.gamePaused = false;
     this.bulletShield = false;
     this.powerUps = [];
+    this.bulletShieldTimeout = null;
   }
 
   showNft(tokenId) {
@@ -45,11 +46,18 @@ class Player {
   // game state
   update() {
     if (this.gamePaused) return;
-    // Check if respawn delay is active
 
+    // Check if respawn delay is active
     if (this.bulletShield) {
-      setTimeout(() => (this.bulletShield = false), 20000);
+      if (this.bulletShieldTimeout) {
+        clearTimeout(this.bulletShieldTimeout); // Clear existing timeout
+      }
+
+      this.bulletShieldTimeout = setTimeout(() => {
+        this.bulletShield = false;
+      }, 20000); // Set the correct duration for the timeout (20 seconds)
     }
+
     if (this.isMovingRight && this.x < width - 40) {
       this.x += 1;
     } else if (this.isMovingLeft && this.x > 0) {
@@ -103,10 +111,6 @@ class Player {
     this.isMovingUp = false;
     this.isMovingDown = true;
   }
-  addPowerUp(powerUp) {
-    // Add the power-up to the player's list
-    this.powerUps.push(powerUp);
-  }
 
   shoot() {
     let bulletOffset = 2;
@@ -139,16 +143,6 @@ class Player {
 
   // drawing methods
   draw() {
-    // Draw active power-ups
-    for (let i = this.powerUps.length - 1; i >= 0; i--) {
-      // this.powerUps[i].update();
-      // this.powerUps[i].display();
-
-      // Check if the power-up duration has expired and remove it
-      if (this.powerUps[i]?.duration <= 0) {
-        this.powerUps.splice(i, 1);
-      }
-    }
     image(this.image, this.x, this.y, this.r * 2, this.r * 2);
     this.drawBullets();
     this.drawGas();

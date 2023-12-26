@@ -288,7 +288,7 @@ function updatePowerUpsAndCheckCollisions() {
       } else if (allPowerUps[i] instanceof Powerup) {
         player.lives += 1;
       }
-      allPowerUps.splice(i, 1);
+      // allPowerUps.splice(i, 1);
       break;
     }
   }
