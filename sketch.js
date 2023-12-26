@@ -39,7 +39,7 @@ function setup() {
   canvas = createCanvas(canvasEl.offsetWidth, 400);
   canvas.style("display", "block");
   canvas.parent("sketch-holder");
-  level = 1;
+  level = 3;
   invaders = new Invaders(alienImage, spaceShip, tank, 3);
   player = new Player(shooterImage);
   // levelStartTime = millis();
